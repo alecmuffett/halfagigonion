@@ -2,7 +2,6 @@
 
 . `dirname $0`/000-profile.sh # defaults
 
-MASTER_ONION=jmlwiy2xu3lmrh66
 ONIONS=ob-onions.txt
 
 for host in $RIG_HOSTS
@@ -16,7 +15,7 @@ done | sed -e s/.onion$// | sort > $ONIONS
     echo "DESCRIPTOR_VALIDITY_PERIOD: 1800"
     echo "LOG_LEVEL: info"
     echo "services:"
-    echo "%%- key: $MASTER_ONION.key"
+    echo "%%- key: master.key"
     echo "%%%%instances:"
     awk '{print "%%%%%%- address: '\''" $1 "'\''"}' < $ONIONS
 ) | sed -e 's/%/ /g' > ob-config.yaml
