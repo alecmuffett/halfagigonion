@@ -10,7 +10,6 @@ RIG_OUTPUT_DIR=$HOME/tmp/
 
 # backplane-rig0
 RIG_HOSTS="
-backplane-rig0
 backplane-rig1
 backplane-rig2
 backplane-rig3

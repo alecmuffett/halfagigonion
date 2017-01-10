@@ -9,6 +9,11 @@ ONIONBALANCE_STATUS_SOCKET_LOCATION=/tmp/ob-control
 ONIONBALANCE_TOR_CONTROL_SOCKET=/tmp/tor-control
 export ONIONBALANCE_STATUS_SOCKET_LOCATION ONIONBALANCE_TOR_CONTROL_SOCKET
 
+# OB wants a directory in /var/run, but does not create it
+rundir=/var/run/onionbalance
+test -d $rundir || sudo mkdir $rundir || exit 1
+sudo chmod 01777 $rundir || exit 1
+
 # where we put the config
 HS_MASTER=`pwd`/hs-master.d
 test -d $HS_MASTER || mkdir $HS_MASTER || exit 1
@@ -34,5 +39,5 @@ EOF
 $tor --hush -f $HS_MASTER/config &
 
 # launch ob
-#exec onionbalance -c config.yaml
-#exit 1
+exec sudo onionbalance -c ob-config.yaml
+exit 1
