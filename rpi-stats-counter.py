@@ -93,11 +93,12 @@ while True:
 	for k, v in analysis.iteritems():
 	    nbytes = diffcache[k]
 	    tdiff = now - previously
-	    bps = int(float(nbytes) / tdiff)
+	    bps = int(nbytes / tdiff)
 	    buffer.append("%s=%d" % (v, bps))
 	print ("%f" % now), " ".join(buffer)
-    else:
-        previously = now
+
+    # remember `now`
+    previously = now
 
     # delay; try to align roughly onto boundaries
     nownow = time.time()
