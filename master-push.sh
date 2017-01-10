@@ -8,5 +8,5 @@ reaper3
 
 for host in $RIG_HOSTS
 do
-    rsync-linktree.sh --exclude="hs*.d" ./ $host:worker.d/
+    rsync-linktree.sh --exclude=".git/" --delete-excluded ./ $host:worker.d/
 done
