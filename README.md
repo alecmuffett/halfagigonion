@@ -14,15 +14,18 @@ Warning: some commands in these scripts are from my environment, i will fix that
 - workers and master alike all use `$HOME/tmp` for local storage
 - master also replicates `$HOME/tmp` from workers to `remote.d`
 
-# Commands for CHARGEN
+# Commands for CHARGEN (for load-testing)
 
 - using OSX, netcat & TorBrowserBundle
   - `nc -X 5 -x localhost:9150 $onion 19`
-    - nb: this will abort if you try to background it
+    - nb: this will abort if you try to background it, because it tries to read from stdin
+      - OSX lacks the `-d` option to `nc` which addresses this
+    - probably easiest to run this command 2/more times in separate tabs/terminals
 - using Linux & a default Tor SOCKS port
   - `nc -d -X 5 -x localhost:9050 $onion 19`
+    - use port 9150 if reusing a `TorBrowserBundle` SOCKS instance
 
-# Commands for HTTP
+# Commands for HTTP (for debugging, not for load-testing)
 
 - using TorBrowserBundle
   - `curl --proxy socks5h://localhost:9150 http://$onion/`
