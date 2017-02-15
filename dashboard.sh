@@ -1,11 +1,14 @@
 #!/bin/sh -x
 
 SESSION=rigdashboard
-LOCAL1=local
-MULTI1=rigs1
-MULTI2=rigs2
-MULTI3=rigs3
-MULTI4=rigs4
+LOCAL1=local1
+LOCAL2=local2
+MULTI1=all # has extra pane for rig0
+MULTI2=rigs1
+MULTI3=rigs2
+MULTI4=rigs3
+
+cd # go home
 
 tmux att -d -t $SESSION && exit 0 # already done
 
@@ -18,12 +21,18 @@ new-session -d -s $SESSION
 rename-window $LOCAL1
 select-window -t $LOCAL1
 
+new-window -n $LOCAL2
+select-window -t $LOCAL2
+split-window -dh -p 50
+select-layout tiled
+
 new-window -n $MULTI1
 select-window -t $MULTI1
 split-window -dv -p 10
 split-window -dh -p 10
 split-window -dh -p 10
 split-window -dv -p 10
+split-window -dh -p 10
 split-window -dh -p 10
 select-layout tiled
 
